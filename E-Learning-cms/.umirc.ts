@@ -2,7 +2,6 @@ import { defineConfig } from '@umijs/max';
 import routes from './config/routes';
 import defaultSettings from './config/defaultSettings';
 
-const qiniuBase = process.env.MODE === 'dev' ? 'cms_dev' : 'cms';
 
 export default defineConfig({
   outputPath: 'elearning/',

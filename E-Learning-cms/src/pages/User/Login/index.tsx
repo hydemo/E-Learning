@@ -44,7 +44,7 @@ const Login: React.FC = () => {
       cookies.set('e-learning_access_token', msg.token);
       cookies.set('e-learning_userinfo', JSON.stringify(msg.userinfo));
       await fetchUserInfo();
-      const initUrl = isDev ? '/' : '/cms/';
+      const initUrl = isDev ? '/' : '/elearning/';
       window.location.href =
         redirect &&
         (redirect !== '/userManagement/userList' || msg.userinfo?.role === 0)
