@@ -5,9 +5,9 @@ import defaultSettings from './config/defaultSettings';
 const qiniuBase = process.env.MODE === 'dev' ? 'cms_dev' : 'cms';
 
 export default defineConfig({
-  outputPath: 'cms/',
-  base: '/cms/',
-  publicPath: '/cms/',
+  outputPath: 'elearning/',
+  base: '/elearning/',
+  publicPath: '/elearning/',
   antd: {},
   access: {},
   model: {},
@@ -29,7 +29,7 @@ export default defineConfig({
     baseNavigator: false,
   },
   manifest: {
-    basePath: '/cms/'
+    basePath: '/elearning/'
   },
   clickToComponent: {},
   mfsu: false,
