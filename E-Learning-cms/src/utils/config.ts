@@ -2,7 +2,7 @@ export const isDev = ['localhost', '127.0.0.1'].includes(location.hostname);
 
 export const baseURL = isDev
   ? `http://${location.hostname}:8001/admin`
-  : `${location.origin}/elearning`;
+  : `${location.origin}/elearningapi`;
 
 export const webUrl = isDev
   ? `http://${location.hostname}:5001`
