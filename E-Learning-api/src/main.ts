@@ -25,18 +25,18 @@ async function bootstrap() {
 
   initService.init();
 
-  if (process.env.NODE_ENV !== 'production') {
-    const ApiOptions = new DocumentBuilder()
-      .setTitle('E-Learning API文档')
-      .setDescription('E-Learning API文档')
-      .setVersion('1.0')
-      .addBearerAuth()
-      .build();
-    const ApiDocument = SwaggerModule.createDocument(app, ApiOptions, {
-      include: [AppModule],
-    });
-    SwaggerModule.setup('swagger', app, ApiDocument);
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  const ApiOptions = new DocumentBuilder()
+    .setTitle('E-Learning API文档')
+    .setDescription('E-Learning API文档')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const ApiDocument = SwaggerModule.createDocument(app, ApiOptions, {
+    include: [AppModule],
+  });
+  SwaggerModule.setup('swagger', app, ApiDocument);
+  // }
   await app.listen(config.port);
 }
 bootstrap();
