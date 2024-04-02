@@ -1,11 +1,12 @@
 import { Controller, Get, Inject, Query, UseGuards, Post, Body, Put, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiTags, ApiForbiddenResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiForbiddenResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { MongodIdPipe } from 'src/common/pipe/mongodId.pipe';
 import { CreateScoreDTO } from 'src/module/score/score.dto';
 import { ScoreService } from 'src/module/score/score.service';
 
 @ApiTags('cms/scores')
+@ApiBearerAuth()
 @ApiForbiddenResponse({ description: 'Unauthorized' })
 @Controller('admin/scores')
 export class CMSScoreController {
@@ -18,10 +19,16 @@ export class CMSScoreController {
   }
 
   @Post('/')
-  @UseGuards(AuthGuard())
+  // @UseGuards(AuthGuard())
   @ApiOperation({ summary: '新增score', description: '新增score' })
   async add(@Body() score: CreateScoreDTO) {
-    await this.scoreService.create(score);
+    return await this.scoreService.create(score);
+  }
+
+  @Get('/:id')
+  @ApiOperation({ summary: 'score详情', description: 'score详情' })
+  async detail(@Param('id', new MongodIdPipe()) id: string) {
+    return await this.scoreService.detail(id);
   }
 
   @Put('/:id/refresh')

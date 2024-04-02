@@ -40,6 +40,10 @@ export class ScoreService {
     return { data, total };
   }
 
+  async detail(scoreId: string) {
+    return await this.scoreModel.findById(scoreId);
+  }
+
   async sleep(timeout: number) {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -160,6 +164,7 @@ export class ScoreService {
     }
     const newScore = await this.scoreModel.create(score);
     await this.score(newScore, systemPrompt);
+    return { scoreId: newScore._id };
   }
 
   async refresh(id: string) {
