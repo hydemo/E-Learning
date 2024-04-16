@@ -12,4 +12,9 @@ export class CreateScoreDTO {
   @Type(() => String)
   @ApiProperty({ description: 'prompt' })
   readonly prompt: string;
+
+  @IsString()
+  @Type(() => String)
+  @ApiProperty({ description: 'model' })
+  readonly LLM_type: string;
 }

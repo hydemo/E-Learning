@@ -78,6 +78,7 @@ export class ScoreService {
         }
         count++;
       } catch (error) {
+        console.log(error, 'error');
         count++;
       }
     }
@@ -149,10 +150,12 @@ export class ScoreService {
           system_prompt: systemPrompt.prompt,
           system_prompt_fields: systemPrompt.fields.join('#'),
           user_prompt: score.prompt,
+          LLM_type: score.LLM_type,
         },
       });
       this.getResult(res.data?.request_id, score, systemPrompt.fields);
     } catch (error) {
+      console.log(error, 'error');
       await this.scoreModel.findByIdAndUpdate(score._id, { status: 2 });
     }
   }

@@ -31,6 +31,12 @@ export const ScoreList = () => {
       valueType: 'text',
     },
     {
+      title: '模型',
+      dataIndex: 'LLM_type',
+      valueType: 'text',
+      render: (_, record) => (record.LLM_type ? record.LLM_type : 'TONG_YI'),
+    },
+    {
       title: 'prompt',
       dataIndex: 'prompt',
       valueType: 'text',

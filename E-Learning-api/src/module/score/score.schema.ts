@@ -14,6 +14,9 @@ export class Score {
   // 状态 0 processing 1 success 2 failed
   @Prop({ default: 0 })
   status: number;
+  // 模型 TONG_YI KIMI
+  @Prop({ default: 'TONG_YI' })
+  LLM_type: string;
   // systemPrompt
   @Prop()
   totalScore: number;

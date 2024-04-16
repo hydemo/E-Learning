@@ -56,6 +56,26 @@ export default (props: FormProps) => {
           },
         ]}
       />
+      <ProFormSelect
+        name="LLM_type"
+        label="模型"
+        request={async ({ keyWords }) => {
+          return [
+            { label: '通义千问', value: 'TONG_YI' },
+            { label: 'Kimi', value: 'KIMI' },
+          ];
+          // return systemPrompts?.data.map((item: any) => ({
+          //   label: item.name,
+          //   value: item._id,
+          // }));
+        }}
+        rules={[
+          {
+            required: true,
+            message: 'SystemPrompt不能为空',
+          },
+        ]}
+      />
     </ModalForm>
   );
 };
