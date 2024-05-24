@@ -14,9 +14,16 @@ export class SystemPrompt {
   // 类型：
   @Prop()
   fields: string[];
+  @Prop()
+  scene: string;
+  @Prop()
+  LLM_type: string;
   // 密码
   @Prop({ default: false })
   isDelete: boolean;
+  // 密码
+  @Prop({ default: false })
+  disable: boolean;
 }
 
 export const SystemPromptSchema = SchemaFactory.createForClass(SystemPrompt);

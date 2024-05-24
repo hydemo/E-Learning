@@ -12,6 +12,8 @@ import {
   remove,
   list,
   SystemPrompt,
+  enable,
+  disable,
 } from '@/services/apiList/systemPrompts';
 
 export const SystemPromptList = () => {
@@ -30,6 +32,11 @@ export const SystemPromptList = () => {
       valueType: 'text',
     },
     {
+      title: 'Scene',
+      dataIndex: 'scene',
+      valueType: 'text',
+    },
+    {
       title: 'Fields',
       dataIndex: 'fields',
       valueType: 'text',
@@ -43,12 +50,23 @@ export const SystemPromptList = () => {
     {
       title: 'prompt',
       dataIndex: 'prompt',
-      width: '600px',
+      width: '500px',
       valueType: 'text',
     },
     {
+      title: 'Disable',
+      dataIndex: 'disable',
+      width: '60px',
+      render: (_, record) => (record.disable ? 'Y' : 'N'),
+    },
+    {
+      title: '模型',
+      dataIndex: 'LLM_type',
+      valueType: 'text',
+      render: (_, record) => (record.LLM_type ? record.LLM_type : 'TONG_YI'),
+    },
+    {
       title: '创建时间',
-
       dataIndex: 'createdAt',
       valueType: 'date',
       search: false,
@@ -66,6 +84,20 @@ export const SystemPromptList = () => {
           }}
         >
           修改
+        </a>,
+        <a
+          key="add"
+          onClick={async () => {
+            if (record.disable) {
+              console.log(22);
+              await enable(record._id);
+            } else {
+              await disable(record._id);
+            }
+            actionRef.current?.reload();
+          }}
+        >
+          {record.disable ? '启用' : '禁用'}
         </a>,
         <Popconfirm
           key="delete"

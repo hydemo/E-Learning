@@ -12,5 +12,6 @@ export enum ApiErrorCode {
   INPUT_ERROR = 10012,
   NO_EXIST = 10013,
   PHONE_EXIST = 10014,
+  SCENE_EXIST = 10014,
   INTERNAL_ERROR = 10015,
 }

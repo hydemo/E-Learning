@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsMongoId, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateScoreDTO {
-  @IsMongoId()
+  @IsString()
   @Type(() => String)
-  @ApiProperty({ description: 'systemPromptId' })
-  readonly systemPrompt: string;
+  @ApiProperty({ description: 'scene' })
+  readonly scene: string;
 
   @IsString()
   @Type(() => String)

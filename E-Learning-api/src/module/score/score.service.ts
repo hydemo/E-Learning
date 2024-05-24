@@ -59,7 +59,7 @@ export class ScoreService {
       try {
         const res: any = await axios({
           method: 'GET',
-          url: 'http://218.249.15.154:6007/get_reason/',
+          url: 'http://123.125.12.71:6007/get_reason/',
           params: {
             request_id,
           },
@@ -92,7 +92,7 @@ export class ScoreService {
         await this.sleep(5000);
         const res: any = await axios({
           method: 'GET',
-          url: 'http://218.249.15.154:6007/get_score/',
+          url: 'http://123.125.12.71:6007/get_score/',
           params: {
             request_id,
           },
@@ -140,7 +140,7 @@ export class ScoreService {
   async score(score: IScore, systemPrompt: ISystemPrompt) {
     try {
       const res: any = await axios({
-        url: 'http://218.249.15.154:6007/system_prompt_score/',
+        url: 'http://123.125.12.71:6007/system_prompt_score/',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -161,11 +161,15 @@ export class ScoreService {
   }
 
   async create(score: CreateScoreDTO) {
-    const systemPrompt = await this.systemPromptService.detail(score.systemPrompt);
+    const systemPrompt = await this.systemPromptService.findByScene(score.scene);
     if (!systemPrompt) {
       throw new ApiException('系统Prompt不存在', ApiErrorCode.NO_EXIST, 404);
     }
-    const newScore = await this.scoreModel.create(score);
+    const newScore = await this.scoreModel.create({
+      ...score,
+      LLM_type: score.LLM_type || systemPrompt.LLM_type,
+      systemPrompt: systemPrompt._id,
+    });
     await this.score(newScore, systemPrompt);
     return { scoreId: newScore._id };
   }

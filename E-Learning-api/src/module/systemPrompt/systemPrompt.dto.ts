@@ -13,6 +13,16 @@ export class CreateSystemPromptDTO {
   @ApiProperty({ description: 'prompt' })
   readonly prompt: string;
 
+  @IsString()
+  @Type(() => String)
+  @ApiProperty({ description: 'scene' })
+  readonly scene: string;
+
+  @IsString()
+  @Type(() => String)
+  @ApiProperty({ description: 'LLM' })
+  readonly LLM_type: string;
+
   @IsString({ each: true })
   @Type(() => String)
   @ApiProperty({ description: 'fields' })

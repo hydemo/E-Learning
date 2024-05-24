@@ -42,6 +42,26 @@ export async function update(id: string, systemPrompt: SystemPrompt) {
   });
 }
 
+export async function disable(id: string) {
+  return request({
+    url: `systemPrompts/${id}/disable`,
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+export async function enable(id: string) {
+  return request({
+    url: `systemPrompts/${id}/enable`,
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
 export async function remove(id: string,) {
   return request({
     url: `systemPrompts/${id}`,

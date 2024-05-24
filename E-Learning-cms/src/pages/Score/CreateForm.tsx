@@ -1,6 +1,5 @@
 import {
   ModalForm,
-  ProFormText,
   ProFormSelect,
   ProFormTextArea,
 } from '@ant-design/pro-components';
@@ -40,13 +39,14 @@ export default (props: FormProps) => {
         ]}
       />
       <ProFormSelect
-        name="systemPrompt"
-        label="System Prompt"
+        name="scene"
+        label="Scene"
+        fieldProps={{ showSearch: true }}
         request={async ({ keyWords }) => {
-          const systemPrompts = await list({ name: keyWords });
+          const systemPrompts = await list({ scene: keyWords });
           return systemPrompts?.data.map((item: any) => ({
-            label: item.name,
-            value: item._id,
+            label: item.scene,
+            value: item.scene,
           }));
         }}
         rules={[
@@ -59,22 +59,12 @@ export default (props: FormProps) => {
       <ProFormSelect
         name="LLM_type"
         label="模型"
-        request={async ({ keyWords }) => {
+        request={async () => {
           return [
             { label: '通义千问', value: 'TONG_YI' },
             { label: 'Kimi', value: 'KIMI' },
           ];
-          // return systemPrompts?.data.map((item: any) => ({
-          //   label: item.name,
-          //   value: item._id,
-          // }));
         }}
-        rules={[
-          {
-            required: true,
-            message: 'SystemPrompt不能为空',
-          },
-        ]}
       />
     </ModalForm>
   );

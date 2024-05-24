@@ -36,6 +36,20 @@ export class CMSSystemPromptController {
     await this.systemPromptService.create(systemPrompt);
   }
 
+  @Put('/:id/disable')
+  @UseGuards(AuthGuard())
+  @ApiOperation({ summary: '禁用systemPrompt', description: '禁用systemPrompt' })
+  async disable(@Param('id', new MongodIdPipe()) id: string) {
+    await this.systemPromptService.disable(id);
+  }
+
+  @Put('/:id/enable')
+  @UseGuards(AuthGuard())
+  @ApiOperation({ summary: '启用systemPrompt', description: '启启用systemPrompt用' })
+  async enable(@Param('id', new MongodIdPipe()) id: string) {
+    await this.systemPromptService.enable(id);
+  }
+
   @Put('/:id')
   @UseGuards(AuthGuard())
   @ApiOperation({ summary: '修改systemPrompt', description: '新增systemPrompt' })

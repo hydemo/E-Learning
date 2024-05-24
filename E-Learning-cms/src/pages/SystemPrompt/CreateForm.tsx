@@ -40,6 +40,33 @@ export default (props: FormProps) => {
           },
         ]}
       />
+      <ProFormText
+        name="scene"
+        label="Scene"
+        placeholder="Scene"
+        rules={[
+          {
+            required: true,
+            message: 'Scene不能为空',
+          },
+        ]}
+      />
+      <ProFormSelect
+        name="LLM_type"
+        label="模型"
+        request={async () => {
+          return [
+            { label: '通义千问', value: 'TONG_YI' },
+            { label: 'Kimi', value: 'KIMI' },
+          ];
+        }}
+        rules={[
+          {
+            required: true,
+            message: 'SystemPrompt不能为空',
+          },
+        ]}
+      />
       <ProFormTextArea
         name="prompt"
         label="Prompt"
