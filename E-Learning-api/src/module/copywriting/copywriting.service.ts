@@ -50,6 +50,8 @@ export class CopywritingService {
   }
 
   async findByScene(scene: string) {
-    return await this.copywritingModel.findOne({ scene });
+    return await this.copywritingModel
+      .findOne({ scene })
+      .populate({ path: 'scoringCriteria', model: 'ScoringCriteria' });
   }
 }

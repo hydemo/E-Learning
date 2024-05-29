@@ -78,7 +78,7 @@ export class CopywritingHistoryService {
 
   async create(copywritingHistory: CreateCopywritingHistoryDTO, res: any) {
     const newCopywritingHistory = await this.copywritingHistoryModel.create(copywritingHistory);
-    const copywriting = await this.copywritingService.detail(copywritingHistory.copywriting);
+    const copywriting = await this.copywritingService.findByScene(copywritingHistory.scene);
     if (!copywriting) {
       throw new ApiException('代写不存在', ApiErrorCode.NO_EXIST, 404);
     }

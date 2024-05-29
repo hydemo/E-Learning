@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsMongoId, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateCopywritingHistoryDTO {
   @IsString()
@@ -8,8 +8,8 @@ export class CreateCopywritingHistoryDTO {
   @ApiProperty({ description: 'prompt' })
   readonly prompt: string;
 
-  @IsMongoId()
+  @IsString()
   @Type(() => String)
   @ApiProperty({ description: 'copywriting' })
-  readonly copywriting: string;
+  readonly scene: string;
 }

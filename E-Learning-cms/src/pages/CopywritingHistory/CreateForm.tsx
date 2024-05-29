@@ -39,14 +39,14 @@ export default (props: FormProps) => {
         ]}
       />
       <ProFormSelect
-        name="copywriting"
+        name="scene"
         label="场景"
         fieldProps={{ showSearch: true }}
         request={async ({ keyWords }) => {
           const systemPrompts = await list({ scene: keyWords });
           return systemPrompts?.data.map((item: any) => ({
             label: item.scene,
-            value: item._id,
+            value: item.scene,
           }));
         }}
         rules={[
