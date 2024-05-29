@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { Button, Tag, Popconfirm, message } from 'antd';
+import { Button, Popconfirm, message } from 'antd';
 import { useRef, useState } from 'react';
 
 import CreateForm from './CreateForm';
@@ -11,15 +11,13 @@ import {
   update,
   remove,
   list,
-  SystemPrompt,
-  enable,
-  disable,
-} from '@/services/apiList/systemPrompts';
+  OptimizeQuestions,
+} from '@/services/apiList/optimizeQuestions';
 
-export const SystemPromptList = () => {
+export const OptimizeQuestionsList = () => {
   const actionRef = useRef<ActionType>();
   const [createModal, setCreateModal] = useState<boolean>(false);
-  const [record, setRecord] = useState<SystemPrompt | null>(null);
+  const [record, setRecord] = useState<OptimizeQuestions | null>(null);
 
   const columns: ProColumns<any>[] = [
     {
@@ -27,37 +25,25 @@ export const SystemPromptList = () => {
       valueType: 'indexBorder',
     },
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: '引导语',
+      width: '300px',
+      ellipsis: true,
+      tooltip: true,
+      dataIndex: 'guide',
       valueType: 'text',
     },
     {
-      title: 'Scene',
-      dataIndex: 'scene',
+      title: '评分标准',
+      dataIndex: ['scoringCriteria', 'name'],
       valueType: 'text',
     },
     {
-      title: 'Fields',
-      dataIndex: 'fields',
+      title: '结束语',
+      width: '300px',
+      ellipsis: true,
+      tooltip: true,
+      dataIndex: 'conclusion',
       valueType: 'text',
-      width: '200px',
-      search: false,
-      render: (_, record) =>
-        record.fields?.map((item: string) => (
-          <Tag key={record._id + item}>{item}</Tag>
-        )),
-    },
-    {
-      title: 'prompt',
-      dataIndex: 'prompt',
-      width: '500px',
-      valueType: 'text',
-    },
-    {
-      title: 'Disable',
-      dataIndex: 'disable',
-      width: '60px',
-      render: (_, record) => (record.disable ? 'Y' : 'N'),
     },
     {
       title: '模型',
@@ -67,6 +53,7 @@ export const SystemPromptList = () => {
     },
     {
       title: '创建时间',
+      width: '100px',
       dataIndex: 'createdAt',
       valueType: 'date',
       search: false,
@@ -84,20 +71,6 @@ export const SystemPromptList = () => {
           }}
         >
           修改
-        </a>,
-        <a
-          key="enable"
-          onClick={async () => {
-            if (record.disable) {
-              console.log(22);
-              await enable(record._id);
-            } else {
-              await disable(record._id);
-            }
-            actionRef.current?.reload();
-          }}
-        >
-          {record.disable ? '启用' : '禁用'}
         </a>,
         <Popconfirm
           key="delete"
@@ -129,7 +102,7 @@ export const SystemPromptList = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.CompanyListItem, API.PageParams>
+      <ProTable<any>
         actionRef={actionRef}
         rowKey="_id"
         request={list}
@@ -160,4 +133,4 @@ export const SystemPromptList = () => {
   );
 };
 
-export default SystemPromptList;
+export default OptimizeQuestionsList;

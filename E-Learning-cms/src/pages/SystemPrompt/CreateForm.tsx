@@ -63,7 +63,7 @@ export default (props: FormProps) => {
         rules={[
           {
             required: true,
-            message: 'SystemPrompt不能为空',
+            message: '模型不能为空',
           },
         ]}
       />

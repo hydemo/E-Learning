@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { Button, Tag, Popconfirm, message } from 'antd';
+import { Button, Popconfirm, message } from 'antd';
 import { useRef, useState } from 'react';
 
 import CreateForm from './CreateForm';
@@ -11,15 +11,13 @@ import {
   update,
   remove,
   list,
-  SystemPrompt,
-  enable,
-  disable,
-} from '@/services/apiList/systemPrompts';
+  ScoringCriteria,
+} from '@/services/apiList/scoringCriteria';
 
-export const SystemPromptList = () => {
+export const ScoringCriteriaList = () => {
   const actionRef = useRef<ActionType>();
   const [createModal, setCreateModal] = useState<boolean>(false);
-  const [record, setRecord] = useState<SystemPrompt | null>(null);
+  const [record, setRecord] = useState<ScoringCriteria | null>(null);
 
   const columns: ProColumns<any>[] = [
     {
@@ -27,43 +25,18 @@ export const SystemPromptList = () => {
       valueType: 'indexBorder',
     },
     {
-      title: 'Name',
+      title: '名称',
+      width: '100px',
       dataIndex: 'name',
       valueType: 'text',
     },
     {
-      title: 'Scene',
-      dataIndex: 'scene',
-      valueType: 'text',
-    },
-    {
-      title: 'Fields',
-      dataIndex: 'fields',
-      valueType: 'text',
-      width: '200px',
-      search: false,
-      render: (_, record) =>
-        record.fields?.map((item: string) => (
-          <Tag key={record._id + item}>{item}</Tag>
-        )),
-    },
-    {
-      title: 'prompt',
-      dataIndex: 'prompt',
+      title: '内容',
       width: '500px',
+      ellipsis: true,
+      tooltip: true,
+      dataIndex: 'content',
       valueType: 'text',
-    },
-    {
-      title: 'Disable',
-      dataIndex: 'disable',
-      width: '60px',
-      render: (_, record) => (record.disable ? 'Y' : 'N'),
-    },
-    {
-      title: '模型',
-      dataIndex: 'LLM_type',
-      valueType: 'text',
-      render: (_, record) => (record.LLM_type ? record.LLM_type : 'TONG_YI'),
     },
     {
       title: '创建时间',
@@ -84,20 +57,6 @@ export const SystemPromptList = () => {
           }}
         >
           修改
-        </a>,
-        <a
-          key="enable"
-          onClick={async () => {
-            if (record.disable) {
-              console.log(22);
-              await enable(record._id);
-            } else {
-              await disable(record._id);
-            }
-            actionRef.current?.reload();
-          }}
-        >
-          {record.disable ? '启用' : '禁用'}
         </a>,
         <Popconfirm
           key="delete"
@@ -129,7 +88,7 @@ export const SystemPromptList = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.CompanyListItem, API.PageParams>
+      <ProTable<any>
         actionRef={actionRef}
         rowKey="_id"
         request={list}
@@ -160,4 +119,4 @@ export const SystemPromptList = () => {
   );
 };
 
-export default SystemPromptList;
+export default ScoringCriteriaList;

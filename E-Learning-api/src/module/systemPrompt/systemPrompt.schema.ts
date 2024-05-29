@@ -18,10 +18,8 @@ export class SystemPrompt {
   scene: string;
   @Prop()
   LLM_type: string;
-  // 密码
   @Prop({ default: false })
   isDelete: boolean;
-  // 密码
   @Prop({ default: false })
   disable: boolean;
 }

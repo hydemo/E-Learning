@@ -55,4 +55,38 @@
       },
     ],
   },
+  {
+    path: '/writing',
+    name: '扩写管理',
+    icon: 'setting',
+    routes: [
+      {
+        path: '/writing',
+        redirect: '/writing/scoringCriteria',
+      },
+      {
+        path: '/writing/scoringCriteria',
+        name: '评分标准管理',
+        component: './ScoringCriteria/ScoringCriteria',
+      },
+      {
+        path: '/writing/optimizeQuestions',
+        name: '扩写提问管理',
+        component: './OptimizeQuestions/OptimizeQuestions',
+      },
+      {
+        path: '/writing/copywriting',
+        name: '代写管理',
+        component: './Copywriting/Copywriting',
+      },
+      {
+        path: '/writing/copywritingHistory',
+        name: '代写历史',
+        component: './CopywritingHistory/CopywritingHistory',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
 ];
